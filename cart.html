@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - GamePasa</title>
+    <link rel="stylesheet" href="cart.css">
+    <link rel="icon" type="png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="logo12.png" alt="Game Pasa" id="logo-img"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="library.html">Library</a></li>
+                    <li><a href="store.html">Store</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="aboutus.html">About us</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search games...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <a href="GamePasa.exe" download class="download-btn">Download</a>
+                <div class="login-container">
+                    <a href="login.html" class="login-btn">Login</a>
+                    <button class="settings-btn">⚙️</button>
+                    <div class="gear-dropdown">
+                        <div class="theme-toggle-container">
+                            <span class="mode-emoji sun">☀️</span>
+                            <label class="switch">
+                                <input type="checkbox" class="theme-toggle">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="mode-emoji moon">🌑</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="cart-container">
+        <h2>Your Shopping Cart</h2>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-summary">
+            <div class="total">
+                <h3>Total: Rs <span id="cart-total">0.00</span></h3>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 GamePasa. All rights reserved.</p>
+        <div class="contact-info">
+            <div class="contact-box">
+                <i class="fas fa-envelope"></i>
+                <p>support@gamepasa.com</p>
+            </div>
+            <div class="contact-box">
+                <i class="fab fa-discord"></i>
+                <p><a href="https://discord.gg/qSzwkvAENH" target="_blank">Join our Discord</a></p>
+            </div>
+            <div class="contact-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <p><a href="https://maps.app.goo.gl/u36pmeffLn7Fu8fT8" target="_blank">Kathmandu, Nepal</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html> 

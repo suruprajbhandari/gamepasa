@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Game</title>
+    <link rel="stylesheet" href="games.css">
+    <style>
+        .game-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            background-color: #000;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background-color: #cc0000;
+        }
+
+        #game-board {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .click-button {
+            width: 50px;
+            height: 50px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .click-button:hover {
+            transform: scale(1.1);
+        }
+
+        .score {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .timer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff0000;
+            font-size: 24px;
+            display: none;
+        }
+
+        .restart-btn {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .restart-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #181a1b;
+            color: #ccc;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <a href="../Library.html" class="back-button">← Back to Library</a>
+    <div class="game-container">
+        <div class="score">Score: 0</div>
+        <div class="timer">Time: 30</div>
+        <div id="game-board">
+            <div class="click-button"></div>
+        </div>
+        <div class="game-over">Game Over!</div>
+        <button class="restart-btn">Play Again</button>
+        <div class="controls">
+            Click the red button to score points!
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 GamePasa. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const clickButton = document.querySelector('.click-button');
+        const scoreDisplay = document.querySelector('.score');
+        const timerDisplay = document.querySelector('.timer');
+        const gameOverDisplay = document.querySelector('.game-over');
+        const restartBtn = document.querySelector('.restart-btn');
+
+        let score = 0;
+        let timeLeft = 30;
+        let gameLoop;
+        let timerLoop;
+        let gameRunning = true;
+
+        function moveButton() {
+            const maxX = gameBoard.clientWidth - clickButton.clientWidth;
+            const maxY = gameBoard.clientHeight - clickButton.clientHeight;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            clickButton.style.left = randomX + 'px';
+            clickButton.style.top = randomY + 'px';
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            timerDisplay.textContent = `Time: ${timeLeft}`;
+            
+            if (timeLeft <= 0) {
+                gameOver();
+            }
+        }
+
+        function gameOver() {
+            clearInterval(gameLoop);
+            clearInterval(timerLoop);
+            gameRunning = false;
+            gameOverDisplay.style.display = 'block';
+            restartBtn.style.display = 'block';
+        }
+
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            scoreDisplay.textContent = 'Score: 0';
+            timerDisplay.textContent = 'Time: 30';
+            gameOverDisplay.style.display = 'none';
+            restartBtn.style.display = 'none';
+            gameRunning = true;
+            
+            moveButton();
+            gameLoop = setInterval(moveButton, 1000);
+            timerLoop = setInterval(updateTimer, 1000);
+        }
+
+        clickButton.addEventListener('click', () => {
+            if (gameRunning) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                moveButton();
+            }
+        });
+
+        restartBtn.addEventListener('click', startGame);
+
+        startGame();
+    </script>
+</body>
+</html> 

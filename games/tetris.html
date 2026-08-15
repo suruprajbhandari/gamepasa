@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris</title>
+    <link rel="stylesheet" href="games.css">
+    <style>
+        .game-container {
+            width: 300px;
+            height: 600px;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background-color: #cc0000;
+        }
+
+        #game-board {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            grid-template-rows: repeat(20, 30px);
+            gap: 1px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            background-color: #333;
+            border: 1px solid #000;
+        }
+
+        .tetromino {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #000;
+        }
+
+        .score {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff0000;
+            font-size: 24px;
+            display: none;
+        }
+
+        .restart-btn {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .restart-btn:hover {
+            background-color: #cc0000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #181a1b;
+            color: #ccc;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <a href="../Library.html" class="back-button">← Back to Library</a>
+    <div class="game-container">
+        <div class="score">Score: 0</div>
+        <div id="game-board">
+            <div class="grid"></div>
+        </div>
+        <div class="game-over">Game Over!</div>
+        <button class="restart-btn">Restart</button>
+        <div class="controls">
+            Use arrow keys to move and rotate pieces
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 GamePasa. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const grid = document.querySelector('.grid');
+        const scoreDisplay = document.querySelector('.score');
+        const gameOverDisplay = document.querySelector('.game-over');
+        const restartBtn = document.querySelector('.restart-btn');
+
+        const COLORS = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800'];
+        const SHAPES = [
+            [[1, 1, 1, 1]], // I
+            [[1, 1], [1, 1]], // O
+            [[1, 1, 1], [0, 1, 0]], // T
+            [[1, 1, 1], [1, 0, 0]], // L
+            [[1, 1, 1], [0, 0, 1]], // J
+            [[1, 1, 0], [0, 1, 1]], // S
+            [[0, 1, 1], [1, 1, 0]]  // Z
+        ];
+
+        let currentPiece = null;
+        let currentPosition = {x: 0, y: 0};
+        let currentShape = null;
+        let currentColor = null;
+        let score = 0;
+        let gameLoop;
+        let gameSpeed = 1000;
+        let board = Array(20).fill().map(() => Array(10).fill(0));
+
+        function createGrid() {
+            for (let i = 0; i < 20; i++) {
+                for (let j = 0; j < 10; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function createNewPiece() {
+            const randomIndex = Math.floor(Math.random() * SHAPES.length);
+            currentShape = SHAPES[randomIndex];
+            currentColor = COLORS[randomIndex];
+            currentPosition = {x: 3, y: 0};
+            currentPiece = document.createElement('div');
+            currentPiece.className = 'tetromino';
+            currentPiece.style.backgroundColor = currentColor;
+            gameBoard.appendChild(currentPiece);
+            updatePiecePosition();
+        }
+
+        function updatePiecePosition() {
+            currentPiece.style.left = currentPosition.x * 30 + 'px';
+            currentPiece.style.top = currentPosition.y * 30 + 'px';
+        }
+
+        function moveDown() {
+            currentPosition.y++;
+            if (checkCollision()) {
+                currentPosition.y--;
+                placePiece();
+                clearLines();
+                createNewPiece();
+                if (checkCollision()) {
+                    gameOver();
+                }
+            }
+            updatePiecePosition();
+        }
+
+        function moveLeft() {
+            currentPosition.x--;
+            if (checkCollision()) {
+                currentPosition.x++;
+            }
+            updatePiecePosition();
+        }
+
+        function moveRight() {
+            currentPosition.x++;
+            if (checkCollision()) {
+                currentPosition.x--;
+            }
+            updatePiecePosition();
+        }
+
+        function rotate() {
+            const rotated = currentShape[0].map((_, i) =>
+                currentShape.map(row => row[i]).reverse()
+            );
+            const oldShape = currentShape;
+            currentShape = rotated;
+            if (checkCollision()) {
+                currentShape = oldShape;
+            }
+        }
+
+        function checkCollision() {
+            for (let y = 0; y < currentShape.length; y++) {
+                for (let x = 0; x < currentShape[y].length; x++) {
+                    if (currentShape[y][x] === 0) continue;
+                    const newX = currentPosition.x + x;
+                    const newY = currentPosition.y + y;
+                    if (newX < 0 || newX >= 10 || newY >= 20) return true;
+                    if (newY >= 0 && board[newY][newX]) return true;
+                }
+            }
+            return false;
+        }
+
+        function placePiece() {
+            for (let y = 0; y < currentShape.length; y++) {
+                for (let x = 0; x < currentShape[y].length; x++) {
+                    if (currentShape[y][x] === 0) continue;
+                    const newX = currentPosition.x + x;
+                    const newY = currentPosition.y + y;
+                    if (newY >= 0) {
+                        board[newY][newX] = currentColor;
+                        const cell = grid.children[newY * 10 + newX];
+                        cell.style.backgroundColor = currentColor;
+                    }
+                }
+            }
+            gameBoard.removeChild(currentPiece);
+        }
+
+        function clearLines() {
+            let linesCleared = 0;
+            for (let y = 19; y >= 0; y--) {
+                if (board[y].every(cell => cell !== 0)) {
+                    linesCleared++;
+                    for (let x = 0; x < 10; x++) {
+                        board[y][x] = 0;
+                        const cell = grid.children[y * 10 + x];
+                        cell.style.backgroundColor = '#333';
+                    }
+                    for (let y2 = y; y2 > 0; y2--) {
+                        for (let x = 0; x < 10; x++) {
+                            board[y2][x] = board[y2-1][x];
+                            const cell = grid.children[y2 * 10 + x];
+                            cell.style.backgroundColor = board[y2][x];
+                        }
+                    }
+                    y++;
+                }
+            }
+            if (linesCleared > 0) {
+                score += linesCleared * 100;
+                scoreDisplay.textContent = 'Score: ' + score;
+            }
+        }
+
+        function gameOver() {
+            clearInterval(gameLoop);
+            gameOverDisplay.style.display = 'block';
+            restartBtn.style.display = 'block';
+        }
+
+        function startGame() {
+            board = Array(20).fill().map(() => Array(10).fill(0));
+            score = 0;
+            scoreDisplay.textContent = 'Score: 0';
+            gameOverDisplay.style.display = 'none';
+            restartBtn.style.display = 'none';
+            grid.innerHTML = '';
+            createGrid();
+            createNewPiece();
+            gameLoop = setInterval(moveDown, gameSpeed);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft': moveLeft(); break;
+                case 'ArrowRight': moveRight(); break;
+                case 'ArrowDown': moveDown(); break;
+                case 'ArrowUp': rotate(); break;
+            }
+        });
+
+        restartBtn.addEventListener('click', startGame);
+
+        startGame();
+    </script>
+</body>
+</html> 
