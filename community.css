@@ -1,0 +1,828 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    cursor: cell;
+}
+
+/* Body */
+body {
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #181a1b;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    height: 100px;
+    margin-left: 50px;
+}
+
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 20px;
+    position: relative;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+    display: block;
+    padding: 5px 0;
+}
+
+nav ul li a.active {
+    color: #ff0000;
+    position: relative;
+    font-weight: bold;
+}
+
+nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff0000;
+}
+
+nav ul li a:hover {
+    color: #ff0000;
+}
+
+/* Light Theme Navigation */
+body.light-theme nav ul li a {
+    color: #000;
+}
+
+body.light-theme nav ul li a:hover {
+    color: #ff0000;
+}
+
+body.light-theme nav ul li a.active {
+    color: #ff0000;
+}
+
+body.light-theme nav ul li a.active::after {
+    background-color: #ff0000;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.login-btn {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.username-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    padding: 8px 18px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.username-box:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.username-box img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username-box span {
+    color: #fff;
+    font-size: 16px;
+}
+
+.username-box .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ff0000;
+    display: none;
+    min-width: 150px;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    margin-top: 5px;
+}
+
+.username-box:hover .dropdown {
+    display: block;
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+.dropdown-item {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #ff0000;
+    color: #fff;
+    transition-delay: 0.1s;
+}
+
+/* Light Theme Username Box */
+body.light-theme .username-box {
+    color: #333;
+    border: 1px solid #ff0000;
+}
+
+body.light-theme .username-box:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+body.light-theme .username-box span {
+    color: #333;
+}
+
+body.light-theme .username-box .dropdown {
+    background-color: #fff;
+    border: 1px solid #ff0000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .dropdown-item {
+    color: #333;
+}
+
+body.light-theme .dropdown-item:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.download-btn {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 8px 18px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.download-btn:hover {
+    background-color: #cc0000;
+}
+
+.cart-icon {
+    position: relative;
+    color: #fff;
+    font-size: 24px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #ff0000;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* Community Section */
+.community-section {
+    padding: 120px 0;
+    background-color: #181a1b;
+    text-align: center;
+}
+
+.community-section h2 {
+    color: #ff0000;
+    font-size: 2.5em;
+    margin-bottom: 50px;
+}
+
+.community-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.community-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 60px;
+}
+
+.stat-item {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 10px;
+    width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-10px);
+}
+
+.stat-item h3 {
+    color: #ff0000;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    color: #ccc;
+    font-size: 1.1em;
+}
+
+.community-cta {
+    margin-top: 40px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.cta-button:hover {
+    background-color: #cc0000;
+    transform: translateY(-3px);
+}
+
+.community-cta p {
+    color: #ccc;
+    font-size: 1.1em;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #181a1b;
+    color: #ccc;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.contact-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    transition: transform 0.3s ease;
+}
+
+.contact-box:hover {
+    transform: translateY(-3px);
+}
+
+.contact-box i {
+    color: #ff0000;
+    font-size: 1.2rem;
+}
+
+.contact-box p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.contact-box p a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-box p a:hover {
+    color: #ff0000;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #242628;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.search-bar:hover, .search-bar:focus-within {
+    background-color: #2a2d2f;
+    border-color: #444;
+}
+
+.search-bar input {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 5px;
+    width: 100%;
+    outline: none;
+}
+
+.search-bar input::placeholder {
+    color: #888;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.search-bar button:hover {
+    color: #ff0000;
+}
+
+/* Light Theme */
+body.light-theme {
+    background-color: #e4e5f1;
+    color: #333;
+}
+
+body.light-theme .navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .community-section {
+    background-color: #fff;
+}
+
+body.light-theme .community-section h2 {
+    color: #ff0000;
+}
+
+body.light-theme .stat-item {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .stat-item h3 {
+    color: #ff0000;
+}
+
+body.light-theme .stat-item p {
+    color: #666;
+}
+
+body.light-theme .cta-button {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+body.light-theme .cta-button:hover {
+    background-color: #cc0000;
+}
+
+body.light-theme .community-cta p {
+    color: #666;
+}
+
+body.light-theme .cart-icon {
+    color: #333;
+}
+
+body.light-theme .cart-count {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+body.light-theme .download-btn {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+body.light-theme .download-btn:hover {
+    background-color: #cc0000;
+}
+
+body.light-theme .login-btn {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #ff0000;
+}
+
+body.light-theme .login-btn:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+body.light-theme footer {
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .contact-box {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+}
+
+body.light-theme .contact-box i {
+    color: #ff0000;
+}
+
+body.light-theme .contact-box p {
+    color: #666;
+}
+
+body.light-theme .contact-box p a {
+    color: #333;
+}
+
+body.light-theme .contact-box p a:hover {
+    color: #ff0000;
+}
+
+body.light-theme .search-bar {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+}
+
+body.light-theme .search-bar input {
+    color: #333;
+}
+
+body.light-theme .search-bar input::placeholder {
+    color: #666;
+}
+
+body.light-theme .search-bar button {
+    color: #333;
+}
+
+body.light-theme .search-bar button:hover {
+    color: #ff0000;
+}
+
+/* Logo Theme Switching */
+#logo-img-light {
+    display: none;
+}
+
+body.light-theme #logo-img {
+    display: none;
+}
+
+body.light-theme #logo-img-light {
+    display: block;
+}
+
+body:not(.light-theme) #logo-img-light {
+    display: none;
+}
+
+body:not(.light-theme) #logo-img {
+    display: block;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+    color: #ff0000;
+}
+
+body.light-theme .mobile-menu-btn {
+    color: #333;
+}
+
+body.light-theme .mobile-menu-btn:hover {
+    color: #ff0000;
+}
+
+/* Nav Menu */
+.nav-menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .logo img {
+        height: 80px;
+        margin-left: 0;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
+
+    .user-actions {
+        gap: 10px;
+    }
+
+    .search-bar {
+        width: 150px;
+    }
+
+    .community-stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .stat-item {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .contact-box {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}
+
+/* Login Container and Gear Button Styles */
+.login-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.settings-btn {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: transparent;
+    border: none;
+    width: 36px;
+    height: 36px;
+}
+
+.settings-btn:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.gear-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ff0000;
+    display: none;
+    min-width: 200px;
+    z-index: 1000;
+    margin-top: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.gear-dropdown.show {
+    display: block;
+}
+
+.gear-dropdown .theme-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    gap: 6px;
+    color: #fff;
+}
+
+.gear-dropdown .theme-toggle-container:hover {
+    background: none;
+}
+
+/* Theme Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 18px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .4s;
+    border-radius: 20px;
+    border: 1px solid #444;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 1px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #ff0000;
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+/* Mode Emojis */
+.mode-emoji {
+    font-size: 14px;
+    cursor: default;
+    user-select: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.mode-emoji.sun {
+    opacity: 1;
+}
+
+/* Light Theme Styles */
+body.light-theme .settings-btn {
+    color: #333;
+}
+
+body.light-theme .settings-btn:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+body.light-theme .gear-dropdown {
+    background-color: #fff;
+    border: 1px solid #ff0000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .gear-dropdown .theme-toggle-container {
+    color: #333;
+}
+
+body.light-theme .slider {
+    background-color: #ccc;
+    border-color: #ddd;
+}
+
+body.light-theme input:checked + .slider {
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+
+body.light-theme .mode-emoji.moon {
+    opacity: 1;
+}
+
+body.light-theme .mode-emoji.sun {
+    opacity: 0.7;
+}
