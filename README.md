@@ -93,7 +93,7 @@ This project helped us:
 
 ### Wireframe
 
-`(add wireframe image here)`
+![Project Logo](logo12.png)
 
 ### UI Screenshots / GIFs
 
