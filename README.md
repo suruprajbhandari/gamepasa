@@ -94,6 +94,10 @@ This project helped us:
 ### Wireframe
 
 ![Wireframe Home](readmeassets/image18.png)
+![Wireframe](readmeassets/image6.png)
+![Wireframe](readmeassets/image10.png)
+![Wireframe](readmeassets/image13.png)
+![Wireframe](readmeassets/image15.png)
 
 ### UI Screenshots / GIFs
 
