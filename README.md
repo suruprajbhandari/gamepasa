@@ -93,7 +93,7 @@ This project helped us:
 
 ### Wireframe
 
-![Project Logo](logo12.png)
+![Wireframe Home](readmeassets/image18.png)
 
 ### UI Screenshots / GIFs
 
