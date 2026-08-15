@@ -101,8 +101,22 @@ This project helped us:
 
 ### UI Screenshots / GIFs
 
-`(add homepage/store/library/community/about/login visuals here)`
+Home Page
+![Wireframe](readmeassets/image9.png)
+Library
+![Wireframe](readmeassets/image8.png)
+Store
+![Wireframe](readmeassets/image3.png) ![Wireframe](readmeassets/image4.png)
+Community
+![Wireframe](readmeassets/image19.png)
+About Us
+![Wireframe](readmeassets/image12.png)
+Login
+![Wireframe](readmeassets/image20.png)
+
+
 
 ### Demo Video
-
+Hosted via AWS
+![Wireframe](readmeassets/image14.gif)
 `(add or link GAMEPASA SHOWCASE.mp4 here)`
