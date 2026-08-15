@@ -43,7 +43,7 @@ Our key objectives were:
 | Website | Launched | `GamePasa.com.np` | Hosted |
 | Documentation | Launched | This README | Completed |
 | Source Code | Launched | Repository files | ZIP shared separately |
-| Login Logs | Launched | `GAME PASA USERS` (Google Sheets) | Stores login history with timestamp |
+| Login Logs | Launched | [GAME PASA USERS](https://docs.google.com/spreadsheets/d/1jhjczr0zQAqXaa-nNR4Gd23VmWhAlKxREr5lQ0qJ9HE/edit?usp=sharing) (Google Sheets) | Stores login history with timestamp |
 
 ## Platform Pages
 
