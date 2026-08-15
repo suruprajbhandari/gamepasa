@@ -1,5 +1,5 @@
 # Game Pasa
-
+![Project Logo](logo12.png) ![Project Logo](logo.png)
 Game Pasa is a student-built gaming platform inspired by modern game storefronts.  
 The project was developed as college coursework to improve practical skills in web development, team collaboration, and problem-solving.
 
