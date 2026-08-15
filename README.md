@@ -75,6 +75,7 @@ Testing was demonstrated in **GAMEPASA SHOWCASE.mp4**, covering:
 The platform was registered and deployed under:
 
 - **GamePasa.com.np**
+- ![Wireframe](readmeassets/image1.png)
 
 ## Conclusion
 
@@ -89,7 +90,6 @@ This project helped us:
 
 ## Media Showcase
 
-> Add your screenshots/GIFs exported from Google Docs into a folder like `assets/` and update the links below.
 
 ### Wireframe
 
@@ -119,4 +119,4 @@ Login
 ### Demo Video
 Hosted via AWS
 ![Wireframe](readmeassets/image14.gif)
-`(add or link GAMEPASA SHOWCASE.mp4 here)`
+
